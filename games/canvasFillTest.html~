@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>画布填充测试</title>
+    <style>
+        canvas {
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+<canvas id='canvas' width="1300" height="960">
+</canvas>
+<script src="../scripts/jquery-1.11.1.min.js"></script>
+<script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    ctx.beginPath();
+    ctx.strokeStyle = "red"
+    ctx.moveTo(300, 30)
+    ctx.lineTo(500, 200);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.strokeStyle = "blue"
+    ctx.moveTo(500, 200)
+    ctx.lineTo(100, 200);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.strokeStyle = "purple"
+    ctx.moveTo(100, 200)
+    ctx.lineTo(300, 30);
+    ctx.stroke();
+</script>
+<script>
+    function floodSeedFill(x, y, oldColor, newColor) {
+
+    }
+    $(function () {
+        $('body').click(
+                function (e) {
+                    alert(e.pageX + "," + e.pageY)
+                }
+        )
+    })
+    var x = 316, y = 144;
+    var imageData = ctx.getImageData(x, y, 1, 1);
+    floodSeedFill(x, y,imageData)
+    //338
+</script>
+<script>
+    var dy = 300;
+    var img = new Image();
+    img.src = "canvasFillTest/love.jpg";
+    img.onload = function () {
+        ctx.drawImage(img, 0, dy);
+        var imgData = ctx.getImageData(0, dy, 100, 100);
+        for (var i = 0; i < imgData.data.length; i++) {
+            imgData.data[i] = 255 - imgData.data[i];
+            imgData.data[i + 1] = 255 - imgData.data[i + 1];
+            imgData.data[i + 2] = 255 - imgData.data[i + 2];
+            imgData.data[i + 3] = 255;
+        }
+        ctx.putImageData(imgData, 0, dy);
+    }
+</script>
+</body>
+</html>

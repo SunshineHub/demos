@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Activity</title>
+    <style type="text/css">
+        body{
+            text-align: center;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<h1>注册登陆示例程序</h1>
+<small><a href="../../index.html">&lt;&lt;返回</a></small>
+<hr>
+<header><a href="https://gist.github.com/me10zyl/d86747aae49a417870ef">&lt;&lt;_查看代码片段_</a></header>
+<header><a href="https://bitbucket.org/me10zyl/1/">&lt;&lt;_查看所有代码_</a></header>
+<header><a href="https://bitbucket.org/me10zyl/1/get/d2ad4f72e0ab.zip">&lt;&lt;_下载代码_</a></header>
+</body>
+</html>
