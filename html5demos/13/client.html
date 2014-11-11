@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+</head>
+<body>
+<ul id="msglist"></ul>
+<input id="msg">
+<input type="button" id="btnSend" value="send">
+<script src="../../scripts/jquery-1.11.1.min.js"></script>
+<script>
+    function appendMessage(e) {
+        $('ul').append("<li>" + e + "</li>")
+    }
+    if (window.WebSocket) {
+        var ws = new WebSocket("ws://zyl-me.xicp.net:8899");
+        //连接成功
+        ws.onopen = function () {
+            appendMessage("连接成功...")
+        }
+        //连接关闭
+        ws.onclose = function () {
+            appendMessage('连接已关闭...')
+        }
+        //接受消息
+        ws.onmessage = function (e) {
+            //e.data
+            appendMessage(e.data);
+        }
+        $("#btnSend").click(function () {
+            ws.send("<font color='red'>zyl</font>：" + $("#msg").val())
+            $("#msg").val("")
+        })
+    }
+</script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>
