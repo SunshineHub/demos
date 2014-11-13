@@ -5,6 +5,7 @@ var ws = require("websocket-server");
 var server = ws.createServer();
 //websocket连接事件.[添加事件]
 server.addListener("connection",function(conn){
+    console.log(conn.id + " connect...");
     conn.addListener("message",function(msg){
         console.log(msg);
         server.broadcast(msg);
