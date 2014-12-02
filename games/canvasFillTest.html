@@ -101,5 +101,14 @@
         ctx.putImageData(imgData, 0, dy);
     }
 </script>
+<pre></pre>
+<script>
+    var html = $('body').html();
+    html = html.replace(/</g, "&lt;");
+    html = html.replace(/>/g, "&gt;");
+    $('pre').html(
+            html
+    );
+</script>
 </body>
 </html>

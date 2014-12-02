@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../../dist/css/bootstrap.min.css">
+    <style>
+        body{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="450" id="planeCanvas">
+</canvas>
+<script src=../../scripts/jquery-1.11.1.min.js"></script>
+<script src="preload.js"></script>
+<script>
+    function Plane()
+    {
+    }
+    function initPlane(){
+        plane.img = new Image();
+        plane.alive = true;
+        plane.x = 0;
+        plane.y = 0;
+    }
+    var plane = new Plane();
+    initPlane();
+    var meteorite = {
+        img : new Image(),
+        x : 0,
+        y : 0
+    }
+    var startImg = new Image();
+    startImg.onload = function(){
+
+    }
+
+    //定义预加载图片数组对象，执行loading模块
+    window.onload = function(){
+        var sources = {
+            explosionEnemy : "/images/explosionEnemy.png",
+            explosionPlayer : "/images/explosionPlayer.png",
+            Player : "/images/Player.png",
+            projectile : "/images/projectile.png",
+            Rock : "/images/Rock.png",
+            SpaceShooter_Lose : "/images/SpaceShooter_Lose.png",
+            SpaceShooter_Win : "/images/SpaceShooter_Win.png",
+            Stars : "/images/Stars.png",
+            Start : "/images/Start.png"
+        };
+        //执行图片预加载，加载完成后执行main
+        loadImages(sources,main);
+    };
+
+    function main(){
+
+    }
+</script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>
