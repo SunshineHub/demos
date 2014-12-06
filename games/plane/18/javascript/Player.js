@@ -8,6 +8,8 @@ function Player() {
     this.speed = 1;
     this.isAlive = true;
     this.bullets = []; //子弹对象
+    this.cd = 70;
+    this.canShoot = true;
 }
 
 Player.prototype.isColide = function (x, y, width, height) {
@@ -35,7 +37,7 @@ Player.prototype.draw = function () {
 }
 
 Player.prototype.wipe = function () {
-    console.log("clear:" + this.x + "," + this.y + "," + director.player.img.width + "," + director.player.img.height);
+    //console.log("clear:" + this.x + "," + this.y + "," + director.player.img.width + "," + director.player.img.height);
     //ctx.clearRect(this.x, this.y, director.player.img.width, director.player.img.height);
     ctx.strokeStyle = "red";
     ctx.lineWidth = 1;
@@ -65,9 +67,12 @@ Player.prototype.down = function () {
 }
 
 Player.prototype.fire = function () {
+    audios.shootMusic.load();
+    audios.shootMusic.play();
     this.bullets.push(new Bullet(images.projectile, this.x + (images.Player.width - images.projectile.width) / 2, this.y + 3));
 }
 
 Player.prototype.explode = function (director) {
+    audios.playerExplosionMusic.play();
     director.playerExplosion = new ExplosionPlayer(this.x,this.y);
 }

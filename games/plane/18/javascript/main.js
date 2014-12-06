@@ -30,10 +30,15 @@ var loopTimes = 0;
 
 function main() {
     clrA();
-    if (gameStatus == "start")
+    if (gameStatus == "start") {
+        audios.BGM.play();
         director.background.draw(director.background.imgStart);
-    else if(gameStatus == "restart")
+    }
+    else if (gameStatus == "restart") {
+        audios.BGM.play();
         director.play();
+    }
+
     $('#planeCanvas').click(function (e) {
         //alert(e.pageX - $(this).offset().left);
     });
@@ -54,6 +59,10 @@ function loop() {
         director.player.draw();
     //遍历子弹
     for (var i = 0; i < director.player.bullets.length; i++) {
+        if (!director.player.bullets[i].isAlive) {
+            director.player.bullets.remove(i);
+            continue;
+        }
         //画子弹
         director.player.bullets[i].draw();
         //碰撞检测 - 碰撞敌人
@@ -65,11 +74,15 @@ function loop() {
 //        }
         //子弹边界移除检测
         if (director.player.bullets[i].y < -images.projectile.height) {
-            director.player.bullets.remove(i);
+            director.player.bullets[i].isAlive = false;
         }
     }
     //遍历敌人
     for (var i = 0; i < director.enemies.length; i++) {
+        if (!director.enemies[i].isAlive) {
+            director.enemies.remove(i);
+            continue;
+        }
         //画敌人
         director.enemies[i].draw2();
         //碰撞检测 - 碰撞玩家
@@ -79,20 +92,21 @@ function loop() {
                 director.player.isAlive = false;
                 break;
             }
+        //陨石边界移除检测
+        if (director.enemies[i].y > scr_height) {
+            director.enemies.isAlive = false;
+            // director.enemies.push(new Enemey(images.Rock, Math.random() * (scr_width - images.Rock.width), -images.Rock.height, 1));
+            director.levelSnippet++;
+        }
         //碰撞检测 - 碰撞子弹
         for (var j = 0; j < director.player.bullets.length; j++) {
             if (director.enemies[i].isColide(director.player.bullets[j].x, director.player.bullets[j].y, images.projectile.width, images.projectile.height)) {
                 director.enemies[i].explode(director);
-                director.enemies.remove(i);
-                director.player.bullets.remove(j);
-                director.score++;
+                if (director.enemies[i].isAlive)
+                    director.score++;
+                director.enemies[i].isAlive = false;
+                director.player.bullets[j].isAlive = false;
             }
-        }
-        //陨石边界移除检测
-        if (director.enemies[i].y > scr_height) {
-            director.enemies.remove(i);
-            // director.enemies.push(new Enemey(images.Rock, Math.random() * (scr_width - images.Rock.width), -images.Rock.height, 1));
-            director.levelSnippet++;
         }
     }
     //遍历敌人爆炸
@@ -155,7 +169,15 @@ function play() {
     }, 1000 / fps);
     $(document).keypress(function (e) {
         if (e.which == 32) {
-            director.player.fire();
+            if (director.player.isAlive && director.player.canShoot)
+            {
+                director.player.fire();
+                director.player.canShoot = false
+                setTimeout(function(){
+                    director.player.canShoot = true;
+                },director.player.cd);
+            }
+
         }
     })
     $(document).keydown(function (e) {
@@ -195,9 +217,10 @@ function play() {
         }
     });
 }
-
 function pause($this) {
     clearInterval($this.animationId);
+    audios.BGM.load();
+    audios.changeSceneMusic.play();
     $(document).keypress(function (e) {
         if (gameStatus == "lose") {
             director = new Director();

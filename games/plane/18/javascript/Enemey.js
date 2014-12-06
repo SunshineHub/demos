@@ -8,6 +8,7 @@ function Enemey(img, x, y, scale) {
     this.speed = 1.2;
     this.scale = scale;
     this.degree = 0;
+    this.isAlive = true;
 }
 
 Enemey.prototype.draw2 = function () {
@@ -48,6 +49,8 @@ Enemey.prototype.draw = function () {
 }
 
 Enemey.prototype.explode = function (director) {
+    audios.enemyExplosionMusic.load();
+    audios.enemyExplosionMusic.play();
     director.enemiesExplosions.push(new ExplosionEnemey(this.x, this.y, images.explosionEnemy,this.speed));
 }
 Enemey.prototype.isColide = function (x, y, width, height) {
