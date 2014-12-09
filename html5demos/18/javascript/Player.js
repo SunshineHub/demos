@@ -11,5 +11,18 @@ function Player(ctx)
 }
 
 Player.prototype.draw = function(){
+    if(keyStatus.up == true)
+    {
+        this.y-=5;
+    }else if(keyStatus.left == true)
+    {
+        this.x-=5;
+    }else if(keyStatus.right == true)
+    {
+        this.x++;
+    }else if(keyStatus.down == true)
+    {
+        this.y++;
+    }
     this.ctx.drawImage(this.image,0,0);
 }

@@ -44,25 +44,34 @@ Player.prototype.wipe = function () {
 }
 Player.prototype.left = function () {
     this.wipe();
-    this.x -= this.speed;
+    //判断飞机越界
+    if (director.player.x >= 0) {
+        this.x -= this.speed;
+    }
     this.draw(this.x, this.y);
 }
 
 Player.prototype.right = function () {
     this.wipe();
-    this.x += this.speed;
+    //判断飞机越界
+    if (director.player.x <= scr_width - this.img.width) {
+    this.x += this.speed;}
     this.draw(this.x, this.y);
 }
 
 Player.prototype.up = function () {
     this.wipe();
-    this.y -= this.speed;
+    //判断飞机越界
+    if (director.player.y >= 0) {
+    this.y -= this.speed;}
     this.draw(this.x, this.y);
 }
 
 Player.prototype.down = function () {
     this.wipe();
-    this.y += this.speed;
+    //判断飞机越界
+    if (director.player.y <= scr_height - this.img.height) {
+    this.y += this.speed;}
     this.draw(this.x, this.y);
 }
 

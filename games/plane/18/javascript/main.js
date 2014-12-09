@@ -55,8 +55,9 @@ function loop() {
     //画背景
     director.background.draw(director.background.imgPlay);
     //画玩家
-    if (director.player.isAlive)
-        director.player.draw();
+    if (director.player.isAlive) {
+            director.player.draw();
+    }
     //遍历子弹
     for (var i = 0; i < director.player.bullets.length; i++) {
         if (!director.player.bullets[i].isAlive) {
@@ -169,13 +170,12 @@ function play() {
     }, 1000 / fps);
     $(document).keypress(function (e) {
         if (e.which == 32) {
-            if (director.player.isAlive && director.player.canShoot)
-            {
+            if (director.player.isAlive && director.player.canShoot) {
                 director.player.fire();
                 director.player.canShoot = false
-                setTimeout(function(){
+                setTimeout(function () {
                     director.player.canShoot = true;
-                },director.player.cd);
+                }, director.player.cd);
             }
 
         }
