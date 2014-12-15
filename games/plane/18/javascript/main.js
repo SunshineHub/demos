@@ -66,13 +66,6 @@ function loop() {
         }
         //画子弹
         director.player.bullets[i].draw();
-        //碰撞检测 - 碰撞敌人
-//        for (var j = 0; j < director.enemies.length; j++) {
-//            if (director.player.bullets[i].isColide(director.enemies[j].x, director.enemies[j].y, director.enemies[j].img.width, director.enemies[j].img.height)) {
-//                director.enemies.remove(j);
-//                director.player.bullets.remove(i);
-//            }
-//        }
         //子弹边界移除检测
         if (director.player.bullets[i].y < -images.projectile.height) {
             director.player.bullets[i].isAlive = false;

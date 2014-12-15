@@ -3,7 +3,7 @@
  */
 function main() {
     $(document).keydown(function (e) {
-        switch (e) {
+        switch (e.which) {
             case keyCode.up:
                 keyStatus.up = true;
                 break;
@@ -19,7 +19,7 @@ function main() {
         }
     });
     $(document).keyup(function (e) {
-        switch (e) {
+        switch (e.which) {
             case keyCode.up:
                 keyStatus.up = false;
                 break;
