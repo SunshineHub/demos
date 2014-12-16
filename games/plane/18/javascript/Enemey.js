@@ -27,7 +27,7 @@ Enemey.prototype.draw2 = function () {
 //    }
     //ctx.clearRect(-imgCenterX - residualX, -imgCenterY - residualY, this.img.width + residualX, this.img.height + residualY);
     ctx.rotate(Math.PI * 2 / 360 * this.degree);
-    ctx.drawImage(this.img, -imgCenterX, -imgCenterY);
+    ctx.drawImage(this.img, -imgCenterX, -imgCenterY,this.img.width * this.scale,this.img.height * this.scale);
     ctx.restore();
 
     if (this.degree == 360) {
