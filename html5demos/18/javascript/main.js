@@ -34,10 +34,10 @@ function main() {
                 break;
         }
     });
-    var director = new Director(ctx);
-    director.background = new Background(ctx);
+    var director = new Director(ctx_bg);
+    director.background = new Background(ctx_bg);
     director.backAudio = $("#backMusic")[0];
-    //director.player.x = $('canvas').width / 2 - images.Player.width / 2;
+    //director.player.x = $('bg').width / 2 - images.Player.width / 2;
     director.play();
 }
 

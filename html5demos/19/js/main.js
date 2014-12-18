@@ -2,37 +2,107 @@
  * Created by Administrator on 2014/12/16.
  */
 function main() {
-    if (window.WebSocket) {
-        //连接WebSocket服务器
-        ws = new WebSocket("ws://127.0.0.1:8899");
-        ws.onopen = function () {
-            //     var json = JSON.parse("{\"oldX\": \"216\", \"oldY\": \"168\", \"x\": \"219\", \"y\": \"172\"}");
-        };
-        ws.onclose = function () {
-            alert('连接关闭');
-        };
-        ws.onmessage = function (e) {
-            var message = e.data;
-            var json = JSON.parse(message);
-            console.log(message);
-            switch (json.type) {
-                //如果是聊天消息
-                case dataType.chatMessage:
-                    break;
-                //如果是绘图消息
-                case dataType.drawMessage:
-                    break;
-                //如果是令牌消息
-                case dataType.tokenMessage:
-                    readyToDraw();
-                    drawToken = true;
-                    break;
+    //connectWS();
+    var fps = 60;
+    setInterval(loop, 1000 / fps);
+}
+
+function loop() {
+    ctx_fg.clearRect(0, 0, scr_width, scr_height);
+    //画select
+    for (var i = 0; i < 15; i++) {
+        for (var j = 0; j < 15; j++) {
+            if (drawHover[i][j] == 1) {
+                new Chess(i, j).drawHover();
             }
-            drawLine(json.oldX, json.oldY, json.x, json.y);//解析错误是因为...服务器代码写错..无语
-        };
-        ws.onerror = function () {
         }
-        $canvas = $('#drawing-pad');
-        ctx = $canvas[0].getContext("2d");
+    }
+    //画自家棋
+    for (var i = 0; i < 15; i++) {
+        for (var j = 0; j < 15; j++) {
+            if (drawChess[i][j] == 1) {
+                new Chess(i, j).draw(chessColor);
+            }
+        }
+    }
+    //画别人家棋
+    for (var i = 0; i < 15; i++) {
+        for (var j = 0; j < 15; j++) {
+            if (drawOtherChess[i][j] == 1) {
+                if (chessColor == "white")
+                    new Chess(i, j).draw("black");
+                else if (chessColor == "black")
+                    new Chess(i, j).draw("white");
+            }
+        }
+    }
+    //画Last
+    for (var i = 0; i < 15; i++) {
+        for (var j = 0; j < 15; j++) {
+            if (drawLast[i][j] == 1) {
+                new Chess(i, j).drawLast();
+            }
+        }
+    }
+    //画win
+    if (gameStatus == "win") {
+        drawWin();
+    }
+    //画lose
+    else if (gameStatus == "lose") {
+        drawLose();
+    }
+}
+
+function onMessage(json) {
+    switch (json.type) {
+        case dataType.chatMessage:
+            $("#chatBox").html($("#chatBox").html() + json.content + "<br>");
+            break;
+        case dataType.gameStatusMessage:
+            gameStatus = json.gameStatus;
+            if (gameStatus == "disconnect") {
+                alert('对方跑了...');
+                initGame();
+            }
+            if (gameStatus == "start") {
+                initChessboard();
+            }
+            break;
+        case dataType.readyMessage:
+            changeOtherReadyState(json.isOtherReady);
+            break;
+        case dataType.tokenMessage:
+            hasToken = json.hasToken;
+            break;
+        case dataType.drawChessMessage:
+            drawOtherChess = json.drawOtherChess;
+            break;
+        case dataType.drawHoverMessage:
+            drawHover = json.drawHover;
+            break;
+        case dataType.drawLastMessage:
+            drawLast = json.drawLast;
+            break;
+        case dataType.initGameMessage:
+            gameStatus = "init";
+            initGame();
+            break;
+        case dataType.chessColorMessage:
+            chessColor = json.color;
+            break;
+        case dataType.winMessage:
+            gameStatus = "lose";
+            initReady();
+            break;
+        case dataType.enterMessage:
+            $("#other").removeClass("invisible");
+            break;
+        case dataType.alertMessage:
+            alert(json.content);
+            $("#chatBox").html($("#chatBox").html() + "<font color=red>" + json.content + "</font><br>");
+            break;
+        default :
+            break;
     }
 }

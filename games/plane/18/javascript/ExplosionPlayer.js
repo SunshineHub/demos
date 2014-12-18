@@ -8,7 +8,7 @@ function ExplosionPlayer(x, y) {
     this.loopTime = 0;
 }
 ExplosionPlayer.prototype.draw = function () {
-    ctx.drawImage(images.explosionPlayer, this.frame * 42, 0, 42, 43, this.x + (images.Player.width - 42) / 2, this.y + (images.Player.height - 43) / 2, 42, 43);
+    ctx_bg.drawImage(images.explosionPlayer, this.frame * 42, 0, 42, 43, this.x + (images.Player.width - 42) / 2, this.y + (images.Player.height - 43) / 2, 42, 43);
     this.y++;
     this.loopTime++;
     if (this.loopTime % 20 == 0) {

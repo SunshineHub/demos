@@ -10,7 +10,7 @@ function ExplosionEnemey(x, y, img, speed) {
     this.loopTime = 0;
 }
 ExplosionEnemey.prototype.draw = function () {
-    ctx.drawImage(images.explosionEnemy,  this.frame * 44, 0, 44, 49, this.x, this.y, 44, 49);
+    ctx_bg.drawImage(images.explosionEnemy,  this.frame * 44, 0, 44, 49, this.x, this.y, 44, 49);
     this.y++;
     this.loopTime++;
     if(this.loopTime % 10 == 0)

@@ -14,9 +14,9 @@ function Player() {
 
 Player.prototype.isColide = function (x, y, width, height) {
     var isCrashed = false;
-    ctx.strokeStyle = "red";
-    ctx.lineWidth = 1;
-    //ctx.strokeRect(x, y, width, height);
+    ctx_bg.strokeStyle = "red";
+    ctx_bg.lineWidth = 1;
+    //ctx_bg.strokeRect(x, y, width, height);
     var residual = 10;
     if (x >= this.x + residual && y >= this.y + residual && x <= this.x - residual + this.img.width && y <= this.y - residual + this.img.height) {
         isCrashed = true;
@@ -33,14 +33,14 @@ Player.prototype.isColide = function (x, y, width, height) {
     return isCrashed;
 }
 Player.prototype.draw = function () {
-    ctx.drawImage(director.player.img, this.x, this.y);
+    ctx_bg.drawImage(director.player.img, this.x, this.y);
 }
 
 Player.prototype.wipe = function () {
     //console.log("clear:" + this.x + "," + this.y + "," + director.player.img.width + "," + director.player.img.height);
-    //ctx.clearRect(this.x, this.y, director.player.img.width, director.player.img.height);
-    ctx.strokeStyle = "red";
-    ctx.lineWidth = 1;
+    //ctx_bg.clearRect(this.x, this.y, director.player.img.width, director.player.img.height);
+    ctx_bg.strokeStyle = "red";
+    ctx_bg.lineWidth = 1;
 }
 Player.prototype.left = function () {
     this.wipe();

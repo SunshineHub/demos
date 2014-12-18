@@ -13,3 +13,6 @@
     font-family: mzd;
     src: url('../font/mzd.ttf');
 }
+.invisible{
+    visibility: hidden;
+}

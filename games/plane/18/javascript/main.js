@@ -14,7 +14,7 @@ Array.prototype.remove = function (dx) {
 }
 
 function clr() {
-    ctx.clearRect(0, 0, scr_width, scr_height);
+    ctx_bg.clearRect(0, 0, scr_width, scr_height);
 }
 function clrBg() {
     ctx_bg.clearRect(0, 0, scr_width, scr_height);
@@ -119,10 +119,10 @@ function loop() {
         }
     }
     //画分数
-    ctx.beginPath();
-    ctx.font = "20px Cursive";
-    ctx.strokeText("分数：" + director.score + "", 0, scr_height - 2);
-    ctx.closePath();
+    ctx_bg.beginPath();
+    ctx_bg.font = "20px Cursive";
+    ctx_bg.strokeText("分数：" + director.score + "", 0, scr_height - 2);
+    ctx_bg.closePath();
     //失败检测
     if (gameStatus == "lose") {
         clrA();

@@ -12,23 +12,23 @@ function Enemey(img, x, y, scale) {
 }
 
 Enemey.prototype.draw2 = function () {
-    ctx.save();
-    ctx.strokeStyle = "red";
-    ctx.lineWidth = 1;
+    ctx_bg.save();
+    ctx_bg.strokeStyle = "red";
+    ctx_bg.lineWidth = 1;
     var imgCenterX = this.img.width / 2;
     var imgCenterY = this.img.height / 2;
-    //  ctx.scale(this.scale, this.scale);
+    //  ctx_bg.scale(this.scale, this.scale);
 //    if (director.player.isColide(this.x, this.y, this.img.width, this.img.height)) {
 //        isCrashed = true;
 //    }
-    ctx.translate(this.x + imgCenterX, this.y + imgCenterY);
+    ctx_bg.translate(this.x + imgCenterX, this.y + imgCenterY);
 //    if (director.player.isColide(-imgCenterX,-imgCenterY, this.img.width, this.img.height)) {
 //        isCrashed = true;
 //    }
-    //ctx.clearRect(-imgCenterX - residualX, -imgCenterY - residualY, this.img.width + residualX, this.img.height + residualY);
-    ctx.rotate(Math.PI * 2 / 360 * this.degree);
-    ctx.drawImage(this.img, -imgCenterX, -imgCenterY,this.img.width * this.scale,this.img.height * this.scale);
-    ctx.restore();
+    //ctx_bg.clearRect(-imgCenterX - residualX, -imgCenterY - residualY, this.img.width + residualX, this.img.height + residualY);
+    ctx_bg.rotate(Math.PI * 2 / 360 * this.degree);
+    ctx_bg.drawImage(this.img, -imgCenterX, -imgCenterY,this.img.width * this.scale,this.img.height * this.scale);
+    ctx_bg.restore();
 
     if (this.degree == 360) {
         this.degree = 0;
@@ -39,12 +39,12 @@ Enemey.prototype.draw2 = function () {
 
 Enemey.prototype.draw = function () {
     var isCrashed = false;
-    ctx.save();
-    ctx.strokeStyle = "red";
-    ctx.lineWidth = 1;
-    //ctx.scale(this.scale, this.scale);
-    ctx.drawImage(this.img, this.x, this.y);
-    ctx.restore();
+    ctx_bg.save();
+    ctx_bg.strokeStyle = "red";
+    ctx_bg.lineWidth = 1;
+    //ctx_bg.scale(this.scale, this.scale);
+    ctx_bg.drawImage(this.img, this.x, this.y);
+    ctx_bg.restore();
     return isCrashed;
 }
 
@@ -55,9 +55,9 @@ Enemey.prototype.explode = function (director) {
 }
 Enemey.prototype.isColide = function (x, y, width, height) {
     var isCrashed = false;
-    ctx.strokeStyle = "red";
-    ctx.lineWidth = 1;
-    //ctx.strokeRect(x, y, width, height);
+    ctx_bg.strokeStyle = "red";
+    ctx_bg.lineWidth = 1;
+    //ctx_bg.strokeRect(x, y, width, height);
     if (x >= this.x && y >= this.y && x <= this.x + this.img.width && y <= this.y + this.img.height) {
         isCrashed = true;
     }

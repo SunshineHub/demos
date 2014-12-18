@@ -8,7 +8,7 @@ function Bullet(img, x, y) {
     this.isAlive = true;
 }
 Bullet.prototype.draw = function () {
-    ctx.drawImage(this.img, this.x, this.y);
+    ctx_bg.drawImage(this.img, this.x, this.y);
     this.y -= 2;
 }
 
