@@ -119,6 +119,9 @@
     }
 </style>
 <body>
+<audio>
+    <source src="media/xinj.mp3">
+</audio>
 <div id="title">CSS3 配对游戏</div>
 <section id="game">
     <div id="cards">
@@ -137,6 +140,7 @@
 <script src="../../scripts/jquery-1.11.1.min.js">
 </script>
 <script>
+    $("audio")[0].play();
     var neusoft = {};
     neusoft.matchinggame = {};
     neusoft.matchinggame.cardWidth = 80;
