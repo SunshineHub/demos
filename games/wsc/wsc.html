@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>wsc</title>
+    <style>
+        .yazi{
+            width: 36px;
+            height: 25px;
+            background: url("yz.png") no-repeat;
+        }
+
+        .red{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="all">
+        <img src="yz.png" class="yazi" />
+    </div>
+    <script src="jquery-3.1.1.min.js"></script>
+    <script>
+        var max = 1506;
+        var ran = Math.floor(Math.random() * max);
+        var $clone = $('.yazi').clone()
+        for(var i = 0;i < max;i++) {
+            if(i == ran) {
+                $("<img class='wsc red'  />").attr('src', 'wsc.png').appendTo(".all")
+            }
+            $clone.clone().appendTo('.all')
+        }
+    </script>
+</body>
+</html>
